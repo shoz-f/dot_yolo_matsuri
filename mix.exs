@@ -25,7 +25,7 @@ defmodule YOLOs.MixProject do
       {:cimg, path: "../cimg_ex"},
       {:onnx_interp, path: "../onnx_interp", env: :test},
       {:nx, "~> 0.4.0"},
-      {:postdnn, path: "../postdnn"}
+      {:postdnn, "~> 0.1.3"}
     ]
   end
 end

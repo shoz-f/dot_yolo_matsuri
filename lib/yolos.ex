@@ -24,10 +24,10 @@ defmodule YOLOs do
   defp draw_item({item, boxes}, canvas) do
     color = @palette[item]
     Enum.reduce(boxes, canvas, fn [_score, x1, y1, x2, y2, _index], canvas ->
-      x1 = if x1 < 0.0, do: 0.0, else: x1
-      y1 = if y1 < 0.0, do: 0.0, else: y1
-      x2 = if x2 > 1.0, do: 1.0, else: x2
-      y2 = if y2 > 1.0, do: 1.0, else: y2
+      x1 = max(x1, 0.0)
+      y1 = max(y1, 0.0)
+      x2 = min(x2, 1.0)
+      y2 = min(y2, 1.0)
 
       CImg.fill_rect(canvas, x1, y1, x2, y2, color, 0.35)
     end)

@@ -1,4 +1,9 @@
 defmodule YOLOX do
+  @moduledoc """
+  Original work:
+    YOLOX - https://github.com/Megvii-BaseDetection/YOLOX
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp, label: "./model_bank/coco.label",
     model: "./model_bank/yolox_s.onnx",

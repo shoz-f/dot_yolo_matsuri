@@ -7,7 +7,7 @@ System.shell("chcp 65001")
 
 Mix.install([
   {:yolos, path: "."},
-  {:kino, "~> 0.6.2"}
+  {:kino, "~> 0.7.0"}
 ])
 ```
 
@@ -41,10 +41,10 @@ defmodule LiveYOLOs do
     color = @palette[item]
 
     Enum.reduce(boxes, canvas, fn [_score, x1, y1, x2, y2, _index], canvas ->
-      x1 = if x1 < 0.0, do: 0.0, else: x1
-      y1 = if y1 < 0.0, do: 0.0, else: y1
-      x2 = if x2 > 1.0, do: 1.0, else: x2
-      y2 = if y2 > 1.0, do: 1.0, else: y2
+      x1 = max(x1, 0.0)
+      y1 = max(y1, 0.0)
+      x2 = min(x2, 1.0)
+      y2 = min(y2, 1.0)
 
       CImg.fill_rect(canvas, x1, y1, x2, y2, color, 0.35)
     end)
@@ -59,11 +59,21 @@ LiveYOLOs.run(YOLOv4, "data/dog.jpg")
 ```
 
 ```elixir
-Kino.Layout.grid(imgs, columns: 3)
+LiveYOLOs.run_all("data/dog.jpg")
+|> Kino.Layout.grid(columns: 2)
 ```
 
 ## 3.TIL ;-)
 
 ## Appendix
+
+### Original work:
+
+1. YOLOv3: https://github.com/hunglc007/tensorflow-yolov4-tflite
+2. YOLOv4: https://github.com/Tianxiaomo/pytorch-YOLOv4
+3. YOLOv5: https://github.com/ultralytics/yolov5
+4. YOLOv6: https://github.com/meituan/YOLOv6
+5. YOLOv7: https://github.com/WongKinYiu/yolov7
+6. YOLOX: https://github.com/Megvii-BaseDetection/YOLOX
 
 &#9633;

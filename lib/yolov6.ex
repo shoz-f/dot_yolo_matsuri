@@ -1,4 +1,9 @@
 defmodule YOLOv6 do
+  @moduledoc """
+  Original work:
+    YOLOv6 - https://github.com/meituan/YOLOv6
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp, label: "./model_bank/coco.label",
     model: "./model_bank/yolov6s.onnx",

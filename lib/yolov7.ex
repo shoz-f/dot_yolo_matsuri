@@ -1,4 +1,9 @@
 defmodule YOLOv7 do
+  @moduledoc """
+  Original work:
+    Official YOLOv7 - https://github.com/WongKinYiu/yolov7
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp,
     model: "./model_bank/yolov7.onnx",

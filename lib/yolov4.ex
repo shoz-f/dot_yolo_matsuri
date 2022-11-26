@@ -1,4 +1,9 @@
 defmodule YOLOv4 do
+  @moduledoc """
+  Original work:
+    Pytorch-YOLOv4 - https://github.com/Tianxiaomo/pytorch-YOLOv4
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp, label: "./model_bank/coco.label",
     model: "./model_bank/yolov4_1_3_608_608_static.onnx",

@@ -22,10 +22,10 @@ defmodule YOLOs.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:cimg, path: "../cimg_ex"},
+      {:cimg, "~> 0.1.14"},
       {:onnx_interp, path: "../onnx_interp", env: :test},
       {:nx, "~> 0.4.0"},
-      {:postdnn, "~> 0.1.3"}
+      {:postdnn, "~> 0.1.4"}
     ]
   end
 end

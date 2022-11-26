@@ -1,4 +1,9 @@
 defmodule YOLOv5 do
+  @moduledoc """
+  Original work:
+    YOLOv5 - https://github.com/ultralytics/yolov5
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp, label: "./model_bank/coco.label",
     model: "./model_bank/yolov5s.onnx",

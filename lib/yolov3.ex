@@ -1,4 +1,9 @@
 defmodule YOLOv3 do
+  @moduledoc """
+  Original work:
+    tensorflow-yolov4-tflite - https://github.com/hunglc007/tensorflow-yolov4-tflite
+  """
+
   alias OnnxInterp, as: NNInterp
   use NNInterp, label: "./model_bank/coco.label",
     model: "./model_bank/yolov3-416.onnx",

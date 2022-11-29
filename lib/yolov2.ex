@@ -37,7 +37,7 @@ defmodule YOLOv2 do
 
   defp extract_boxes(t) do
     # decode box center coordinate on {1.0, 1.0}
-    center = Nx.logistic(t[0..1])
+    center = Nx.sigmoid(t[0..1])
       |> Nx.multiply(@grid[2..3])  # * pitch(x,y)
       |> Nx.add(@grid[0..1])    # + grid(x,y)
       |> Nx.transpose()
@@ -58,12 +58,10 @@ defmodule YOLOv2 do
 
   defp extract_scores(t) do
     # decode box confidence
-    confidence = Nx.logistic(t[4])
+    confidence = Nx.sigmoid(t[4])
 
     # decode class scores: (softmax normalized class score)*(box confidence)
-    exp = Nx.exp(t[5..-1//1])
-
-    Nx.divide(exp, Nx.sum(exp, axes: [0])) # apply softmax on each class score
+    then(Nx.exp(t[5..-1//1]), fn exp -> Nx.divide(exp, Nx.sum(exp, axes: [0])) end) # apply softmax on each class score
     |> Nx.multiply(confidence)
     |> Nx.transpose()
   end

@@ -1,4 +1,4 @@
-# 怒涛のよろず祭り(OnnxInterp編)
+# Elixirで怒涛のよろず祭り(OnnxInterp編)
 
 ```elixir
 File.cd!(__DIR__)
@@ -18,6 +18,11 @@ Mix.install([
 defmodule LiveYOLOs do
   @palette CImg.Util.rand_palette("./model_bank/coco.label")
 
+  def run_all(path) do
+    img = CImg.load(path)
+    Enum.map(YOLOs.Application.yolos(), &run(&1, img))
+  end
+
   def run(yolo, path) when is_binary(path) do
     run(yolo, CImg.load(path))
   end
@@ -25,13 +30,9 @@ defmodule LiveYOLOs do
   def run(yolo, %CImg{} = img) do
     with {:ok, res} <- yolo.apply(img) do
       Enum.reduce(res, CImg.builder(img), &draw_item(&1, &2))
+      |> CImg.draw_text(15, 15, Atom.to_string(yolo), 20, :white, :blue)
       |> CImg.display_kino(:jpeg)
     end
-  end
-
-  def run_all(path) do
-    img = CImg.load(path)
-    Enum.map(YOLOs.Application.yolos(), &run(&1, img))
   end
 
   defp draw_item({item, boxes}, canvas) do
@@ -49,7 +50,7 @@ end
 ## 2.Let's try it
 
 ```elixir
-LiveYOLOs.run(YOLOX, "data/dog.jpg")
+LiveYOLOs.run(YOLOv7, "data/dog.jpg")
 ```
 
 ```elixir

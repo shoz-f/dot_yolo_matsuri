@@ -17,7 +17,7 @@ defmodule YOLOs.Application do
 
   def yolos() do
     [
-      YOLOv2, YOLOv3, YOLOv4, YOLOv5, YOLOv6, YOLOv7, YOLOX
+      YOLOv2, YOLOv3, YOLOv4, YOLOv5, YOLOX, YOLOv6, YOLOv7
     ]
   end
 end
